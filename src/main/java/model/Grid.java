@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -91,12 +92,27 @@ public class Grid implements Iterable<Cell> {
 
     // TODO: Écrire une version correcte de cette méthode.
     private List<Cell> getNeighbours(int rowIndex, int columnIndex) {
-        return null;
+        List<Cell> list = new ArrayList<>();
+        for (int row = rowIndex-1; row < rowIndex+2; row++){
+            for (int column = columnIndex-1; column < columnIndex+2; column++){
+                if (row != rowIndex && column != columnIndex){
+                    list.add(getCell(row, column));
+                }
+            }
+        }
+        return list;
     }
 
     // TODO: Écrire une version correcte de cette méthode.
     private int countAliveNeighbours(int rowIndex, int columnIndex) {
-        return 0;
+        int alive = 0;
+        List<Cell> listCell= this.getNeighbours(rowIndex, columnIndex);
+        for (Cell cell : listCell){
+            if (cell.isAlive()){
+                alive++;
+            }
+        }
+        return alive;
     }
 
     // TODO: Écrire une version correcte de cette méthode.
